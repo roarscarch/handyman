@@ -1,0 +1,28 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/HandymanMarketplace.Api/Dockerfile
+    environment:
+      # Required
+      WEBHOOK_API_KEY: ${WEBHOOK_API_KEY}
+      # SQLite file path inside container
+      ConnectionStrings__Default: "Data Source=/data/app.db"
+    volumes:
+      - api-data:/data
+    ports:
+      - "8080:8080"
+
+  web:
+    build:
+      context: .
+      dockerfile: frontend/handyman-frontend/Dockerfile
+    depends_on:
+      - api
+    ports:
+      - "3000:80"
+
+volumes:
+  api-data:
+
+
