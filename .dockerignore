@@ -11,6 +11,5 @@
 **/*.log
 **/TestResults/
 .git/
-.gitignore
 
 
